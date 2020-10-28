@@ -31,14 +31,21 @@ class App{
 
 		this.mesh = new THREE.Mesh(geometry, material);
 
+		this.scene.add(this.mesh);
+
+		const controls= new OrbitControls(this.camera, this.renderer.domElement);
+
         window.addEventListener('resize', this.resize.bind(this) );
 	}	
     
     resize(){
-        
+		this.camera.aspect = window.innerWidth/window.innerHeight;
+		this.camera.updateProjectionMatrix();
+		this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
     
 	render( ) {  
+		this.mesh.rotateY(0.01);
         this.renderer.render(this.scene, this.camera);
     }
 }
