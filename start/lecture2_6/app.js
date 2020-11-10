@@ -34,7 +34,7 @@ class App{
 		
         //Add code here
 
-        this.LoadingBar = new LoadingBar();
+        this.loadingBar = new LoadingBar();
         this.loadGLTF();
         
         
