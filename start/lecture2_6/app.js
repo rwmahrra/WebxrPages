@@ -33,9 +33,10 @@ class App{
 		container.appendChild( this.renderer.domElement );
 		
         //Add code here
-
         this.loadingBar = new LoadingBar();
+        
         this.loadGLTF();
+        //this.loadFBX();
         
         
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
@@ -64,26 +65,44 @@ class App{
     }
     
     loadGLTF(){
+        const loader = new GLTFLoader( ).setPath('../../assets/');
         const self = this;
-        const loader = new GLTFLoader().setPath('../../assets/');
-
-        loader.load(
-            'office-chair.glb',
-            function(gltf){
+		
+		// Load a glTF resource
+		loader.load(
+			// resource URL
+			'office-chair.glb',
+			// called when the resource is loaded
+			function ( gltf ) {
+                const bbox = new THREE.Box3().setFromObject( gltf.scene );
+                console.log(`min:${bbox.min.x.toFixed(2)},${bbox.min.y.toFixed(2)},${bbox.min.z.toFixed(2)} -  max:${bbox.max.x.toFixed(2)},${bbox.max.y.toFixed(2)},${bbox.max.z.toFixed(2)}`);
+                
+                gltf.scene.traverse( ( child ) => {
+                    if (child.isMesh){
+                        child.material.metalness = 0.2;
+                    }
+                })
                 self.chair = gltf.scene;
-                const bbox = new THREE.Box3().setFromObject(gltf.scene);
-                console.log('min:${vector3ToString(bbox.min, 2)} - max:${vector3ToString(bbox.max, 2)}')
-                self.scene.add(gltf.scene);
+                
+				self.scene.add( gltf.scene );
+                
                 self.loadingBar.visible = false;
-                self.renderer.setAnimationLoop(self.renderer.bind(self));
-            },
-            function(xhr){
-                self.loadingBar.progress = xhr.loaded/xhr.total;
-            },
-            function(err){
-                console.log('an error happened')
-            }
-        )
+				
+				self.renderer.setAnimationLoop( self.render.bind(self));
+			},
+			// called while loading is progressing
+			function ( xhr ) {
+
+				self.loadingBar.progress = (xhr.loaded / xhr.total);
+				
+			},
+			// called when loading has errors
+			function ( error ) {
+
+				console.log( 'An error happened' );
+
+			}  
+        );
     }
     
     loadFBX(){
