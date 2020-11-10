@@ -26,13 +26,14 @@ class App{
 		
         const geometry = new THREE.TorusKnotBufferGeometry( 0.8, 0.3, 120, 16 ); 
         
-        //takes a color value - no lights
-        //const material = new THREE.MeshBasicMaterial( { color: 0xFFFF00 });
+        // takes a color value - no lights
+        // const material = new THREE.MeshBasicMaterial( { color: 0xFFFF00 });
 
         // MeshLambertMaterial - shading calculated at vertex - no specular highlights
-        const material = new THREE.MeshLambertMaterial({ color: 0xFFFF00 });
+        // const material = new THREE.MeshLambertMaterial({ color: 0xFFFF00 });
 
-
+        //MeshPhongMaterial - 
+        const material = new THREE.MeshPhongMaterial({color: 0xFFFF00, specular: 0x444444, shininess: 60})
 
 
 
