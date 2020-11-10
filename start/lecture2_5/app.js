@@ -33,8 +33,9 @@ class App{
         // const material = new THREE.MeshLambertMaterial({ color: 0xFFFF00 });
 
         //MeshPhongMaterial - 
-        const material = new THREE.MeshPhongMaterial({color: 0xFFFF00, specular: 0x444444, shininess: 60})
+        //const material = new THREE.MeshPhongMaterial({color: 0xFFFF00, specular: 0x444444, shininess: 60})
 
+        const material = new THREE.MeshStandardMaterial({color: 0xFFFF00, metalness: 0.8, roughness: 0.3})
 
 
 
