@@ -32,7 +32,19 @@ class VRButton{
         button.style.cursor = 'pointer';
         button.innerHTML = '<i class="fas fa-vr-cardboard></i>';
 
-        
+        button.onmouseenter = function(){
+            button.style.fontSize = '12px';
+            button.textContent = (currentSesstion===null) ? 'Enter VR' : 'Exit VR';
+            button.style.opacity = '1';
+        };
+
+        button.onmouseleave = function(){
+            button.style.fontsize = '30px';
+            button.innerHTML = '<i class="fas fa-vr-cardboard"></i>';
+            button.style.opacity = '0.5';
+        }
+
+
     }
 
     disableButton( button ) {
