@@ -103,7 +103,7 @@ class App{
         const controllers = [];
 
         for (let i = 0; i<=1; i++){
-            // 
+            // direction in which controller is pointing
             const controller = this.renderer.xr.getController(i);
             controller.add(line.clone());
             controller.userData.selectPressed = false;
@@ -111,6 +111,7 @@ class App{
 
             controllers.push(controller);
 
+            // direction in which controller is positioned
             const grip = this.renderer.xr.getControllerGrip(i);
             grip.add(controllerModelFactory.createControllerModel(grip));
             this.scene.add(grip);
