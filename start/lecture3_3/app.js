@@ -98,11 +98,12 @@ class App{
 
         const line = new THREE.Line(geometry);
         line.name = 'line';
-        line.scale.z = 0;
+        line.scale.z = 10;
 
         const controllers = [];
 
         for (let i = 0; i<=1; i++){
+            // 
             const controller = this.renderer.xr.getController(i);
             controller.add(line.clone());
             controller.userData.selectPressed = false;
